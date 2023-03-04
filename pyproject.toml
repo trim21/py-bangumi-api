@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bangumi-api"
+version = "0.1.0"
+description = ""
+authors = ["Trim21 <trim21.me@gmail.com>"]
+readme = "readme.md"
+packages = [{include = "bangumi_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+httpx = "^0.23.3"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = {version = "^3.0.4", python = "^3.9"}
+datamodel-code-generator = "^0.17.1"
+
+[tool.poetry-plugin-bump]
+commit_msg = 'bump: v{version}'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
