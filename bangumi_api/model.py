@@ -8,11 +8,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from pydantic import BaseModel, Extra, Field, conint
-
-
-class SubjectID(BaseModel):
-    __root__: conint(ge=1) = Field(..., description="条目 ID", title="Subject ID")
+from pydantic import BaseModel, Extra, Field
 
 
 class Avatar(BaseModel):

@@ -1,3 +1,5 @@
+from typing import Optional
+
 import httpx
 
 from bangumi_api.error import NotFoundError, UnauthorizedError
@@ -7,7 +9,7 @@ from bangumi_api.model import Subject, User
 class Client:
     client: httpx.Client
 
-    def __init__(self, token: str = None):
+    def __init__(self, token: Optional[str] = None):
         headers = {"user-agent": "py-bangumi-api/dev"}
         if token:
             headers.update({"authorization": f"Bearer {token}"})
