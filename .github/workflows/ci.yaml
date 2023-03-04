@@ -28,15 +28,8 @@ jobs:
 
       - uses: Trim21/install-poetry-project@dist/v1
 
-      - name: setup test env
-        run: docker-compose -f tests/docker-compose.yaml up -d
-
       - name: test
         run: coverage run -m pytest
-        env:
-          TR_PORT: 8080
-          TR_USER: admin
-          TR_PASSWORD: mysecretpassword
 
       - run: bash <(curl -s https://codecov.io/bash) -F ${{ matrix.python }}
 
