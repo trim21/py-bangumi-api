@@ -6,19 +6,19 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 from pydantic import BaseModel, Extra, Field, conint
 
 
 class SubjectID(BaseModel):
-    __root__: conint(ge=1) = Field(..., description='条目 ID', title='Subject ID')
+    __root__: conint(ge=1) = Field(..., description="条目 ID", title="Subject ID")
 
 
 class Avatar(BaseModel):
-    large: str = Field(..., title='Large')
-    medium: str = Field(..., title='Medium')
-    small: str = Field(..., title='Small')
+    large: str = Field(..., title="Large")
+    medium: str = Field(..., title="Medium")
+    small: str = Field(..., title="Small")
 
 
 class UserGroup(Enum):
@@ -37,7 +37,7 @@ class BloodType(Enum):
     A = 1
     B = 2
     AB = 3
-    O = 4
+    O = 4  # noqa: E741
 
 
 class CharacterType(Enum):
@@ -62,50 +62,50 @@ class EpisodeCollectionType(Enum):
 
 
 class Creator(BaseModel):
-    username: str = Field(..., title='Username')
-    nickname: str = Field(..., title='Nickname')
+    username: str = Field(..., title="Username")
+    nickname: str = Field(..., title="Nickname")
 
 
 class DetailedRevision(BaseModel):
-    id: int = Field(..., title='ID')
-    type: int = Field(..., title='Type')
-    creator: Optional[Creator] = None
-    summary: str = Field(..., title='Summary')
-    created_at: datetime = Field(..., title='Created At')
-    data: Optional[str] = Field(None, description='编辑修改内容', title='Data')
+    id: int = Field(..., title="ID")
+    type: int = Field(..., title="Type")
+    creator: Creator | None = None
+    summary: str = Field(..., title="Summary")
+    created_at: datetime = Field(..., title="Created At")
+    data: str | None = Field(None, description="编辑修改内容", title="Data")
 
 
 class PersonRevisionProfession(BaseModel):
-    producer: Optional[str] = Field(None, title='Producer')
-    mangaka: Optional[str] = Field(None, title='Mangaka')
-    artist: Optional[str] = Field(None, title='Artist')
-    seiyu: Optional[str] = Field(None, title='Seiyu')
-    writer: Optional[str] = Field(None, title='Writer')
-    illustrator: Optional[str] = Field(None, title='Illustrator')
-    actor: Optional[str] = Field(None, title='Actor')
+    producer: str | None = Field(None, title="Producer")
+    mangaka: str | None = Field(None, title="Mangaka")
+    artist: str | None = Field(None, title="Artist")
+    seiyu: str | None = Field(None, title="Seiyu")
+    writer: str | None = Field(None, title="Writer")
+    illustrator: str | None = Field(None, title="Illustrator")
+    actor: str | None = Field(None, title="Actor")
 
 
 class RevisionExtra(BaseModel):
-    img: Optional[str] = Field(None, title='Image')
+    img: str | None = Field(None, title="Image")
 
 
 class SubjectRevisionData(BaseModel):
-    field_eps: int = Field(..., title='Field EPs')
-    field_infobox: str = Field(..., title='Field Infobox')
-    field_summary: str = Field(..., title='Field Summary')
-    name: str = Field(..., title='Name')
-    name_cn: str = Field(..., title='Name CN')
-    platform: int = Field(..., title='Platform')
-    subject_id: int = Field(..., title='Subject ID')
-    type: int = Field(..., title='Type')
-    type_id: int = Field(..., title='Type ID')
-    vote_field: str = Field(..., title='Vote Field')
+    field_eps: int = Field(..., title="Field EPs")
+    field_infobox: str = Field(..., title="Field Infobox")
+    field_summary: str = Field(..., title="Field Summary")
+    name: str = Field(..., title="Name")
+    name_cn: str = Field(..., title="Name CN")
+    platform: int = Field(..., title="Platform")
+    subject_id: int = Field(..., title="Subject ID")
+    type: int = Field(..., title="Type")
+    type_id: int = Field(..., title="Type ID")
+    vote_field: str = Field(..., title="Vote Field")
 
 
 class CharacterRevisionDataItem(BaseModel):
-    infobox: str = Field(..., title='Character Infobox')
-    summary: str = Field(..., title='Character Summary')
-    name: str = Field(..., title='Character Name')
+    infobox: str = Field(..., title="Character Infobox")
+    summary: str = Field(..., title="Character Summary")
+    name: str = Field(..., title="Character Name")
     extra: RevisionExtra
 
 
@@ -120,131 +120,130 @@ class EpType(Enum):
 
 
 class Episode(BaseModel):
-    id: int = Field(..., title='ID')
-    type: int = Field(..., description='`0` 本篇，`1` SP，`2` OP，`3` ED', title='Type')
-    name: str = Field(..., title='Name')
-    name_cn: str = Field(..., title='Name Cn')
-    sort: float = Field(..., description='同类条目的排序和集数', title='Sort')
-    ep: Optional[float] = Field(
-        None, description='条目内的集数, 从`1`开始。非本篇剧集的此字段无意义', title='Ep'
+    id: int = Field(..., title="ID")
+    type: int = Field(..., description="`0` 本篇，`1` SP，`2` OP，`3` ED", title="Type")
+    name: str = Field(..., title="Name")
+    name_cn: str = Field(..., title="Name Cn")
+    sort: float = Field(..., description="同类条目的排序和集数", title="Sort")
+    ep: float | None = Field(
+        None, description="条目内的集数, 从`1`开始。非本篇剧集的此字段无意义", title="Ep"
     )
-    airdate: str = Field(..., title='Airdate')
-    comment: int = Field(..., title='Comment')
-    duration: str = Field(..., description='维基人填写的原始时长', title='Duration')
-    desc: str = Field(..., description='简介', title='Desc')
-    disc: int = Field(..., description='音乐曲目的碟片数', title='Disc')
-    duration_seconds: Optional[int] = Field(None,
-                                            description='服务器解析的时长，无法解析时为 `0`')
+    airdate: str = Field(..., title="Airdate")
+    comment: int = Field(..., title="Comment")
+    duration: str = Field(..., description="维基人填写的原始时长", title="Duration")
+    desc: str = Field(..., description="简介", title="Desc")
+    disc: int = Field(..., description="音乐曲目的碟片数", title="Disc")
+    duration_seconds: int | None = Field(None, description="服务器解析的时长，无法解析时为 `0`")
 
 
 class EpisodeDetail(BaseModel):
-    id: int = Field(..., title='ID')
-    type: int = Field(..., description='`0` 本篇，`1` SP，`2` OP，`3` ED', title='Type')
-    name: str = Field(..., title='Name')
-    name_cn: str = Field(..., title='Name Cn')
-    sort: float = Field(..., description='同类条目的排序和集数', title='Sort')
-    ep: Optional[float] = Field(
-        None, description='条目内的集数, 从`1`开始。非本篇剧集的此字段无意义', title='Ep'
+    id: int = Field(..., title="ID")
+    type: int = Field(..., description="`0` 本篇，`1` SP，`2` OP，`3` ED", title="Type")
+    name: str = Field(..., title="Name")
+    name_cn: str = Field(..., title="Name Cn")
+    sort: float = Field(..., description="同类条目的排序和集数", title="Sort")
+    ep: float | None = Field(
+        None, description="条目内的集数, 从`1`开始。非本篇剧集的此字段无意义", title="Ep"
     )
-    airdate: str = Field(..., title='Airdate')
-    comment: int = Field(..., title='Comment')
-    duration: str = Field(..., title='Duration')
-    desc: str = Field(..., description='简介', title='Desc')
-    disc: int = Field(..., description='音乐曲目的碟片数', title='Disc')
-    subject_id: int = Field(..., title='Subject ID')
+    airdate: str = Field(..., title="Airdate")
+    comment: int = Field(..., title="Comment")
+    duration: str = Field(..., title="Duration")
+    desc: str = Field(..., description="简介", title="Desc")
+    disc: int = Field(..., description="音乐曲目的碟片数", title="Disc")
+    subject_id: int = Field(..., title="Subject ID")
 
 
 class DetailItem(BaseModel):
-    error: Optional[str] = Field(None, description='error message')
-    path: Optional[str] = Field(None, description='request path')
+    error: str | None = Field(None, description="error message")
+    path: str | None = Field(None, description="request path")
 
 
 class ErrorDetail(BaseModel):
-    title: str = Field(..., title='Title')
-    description: str = Field(..., title='Description')
-    detail: Optional[Union[str, DetailItem]] = Field(None, title='Detail')
+    title: str = Field(..., title="Title")
+    description: str = Field(..., title="Description")
+    detail: str | DetailItem | None = Field(None, title="Detail")
 
 
 class Images(BaseModel):
-    large: str = Field(..., title='Large')
-    common: str = Field(..., title='Common')
-    medium: str = Field(..., title='Medium')
-    small: str = Field(..., title='Small')
-    grid: str = Field(..., title='Grid')
+    large: str = Field(..., title="Large")
+    common: str = Field(..., title="Common")
+    medium: str = Field(..., title="Medium")
+    small: str = Field(..., title="Small")
+    grid: str = Field(..., title="Grid")
 
 
 class ValueItem(BaseModel):
-    k: str = Field(..., title='K')
-    v: str = Field(..., title='V')
+    k: str = Field(..., title="K")
+    v: str = Field(..., title="V")
 
 
 class ValueItem1(BaseModel):
-    v: str = Field(..., title='V')
+    v: str = Field(..., title="V")
 
 
 class WikiV0Item(BaseModel):
-    key: str = Field(..., title='Key')
-    value: Union[str, List[Union[ValueItem, ValueItem1]]] = Field(..., title='Value')
+    key: str = Field(..., title="Key")
+    value: str | list[ValueItem | ValueItem1] = Field(..., title="Value")
 
 
 class WikiV0(BaseModel):
-    __root__: List[WikiV0Item] = Field(
+    __root__: list[WikiV0Item] = Field(
         ...,
         example=[
-            {'key': '简体中文名', 'value': '鲁路修·兰佩路基'},
+            {"key": "简体中文名", "value": "鲁路修·兰佩路基"},
             {
-                'key': '别名',
-                'value': [
-                    {'v': 'L.L.'},
-                    {'v': '勒鲁什'},
-                    {'v': '鲁鲁修'},
-                    {'v': 'ゼロ'},
-                    {'v': 'Zero'},
-                    {'k': '英文名', 'v': 'Lelouch Lamperouge'},
-                    {'k': '第二中文名', 'v': '鲁路修·冯·布里塔尼亚'},
-                    {'k': '英文名二', 'v': 'Lelouch Vie Britannia'},
-                    {'k': '日文名', 'v': 'ルルーシュ・ヴィ・ブリタニア'},
+                "key": "别名",
+                "value": [
+                    {"v": "L.L."},
+                    {"v": "勒鲁什"},
+                    {"v": "鲁鲁修"},
+                    {"v": "ゼロ"},
+                    {"v": "Zero"},
+                    {"k": "英文名", "v": "Lelouch Lamperouge"},
+                    {"k": "第二中文名", "v": "鲁路修·冯·布里塔尼亚"},
+                    {"k": "英文名二", "v": "Lelouch Vie Britannia"},
+                    {"k": "日文名", "v": "ルルーシュ・ヴィ・ブリタニア"},
                 ],
             },
-            {'key': '性别', 'value': '男'},
-            {'key': '生日', 'value': '12月5日'},
-            {'key': '血型', 'value': 'A型'},
-            {'key': '身高', 'value': '178cm→181cm'},
-            {'key': '体重', 'value': '54kg'},
-            {'key': '引用来源', 'value': 'Wikipedia'},
+            {"key": "性别", "value": "男"},
+            {"key": "生日", "value": "12月5日"},
+            {"key": "血型", "value": "A型"},
+            {"key": "身高", "value": "178cm→181cm"},
+            {"key": "体重", "value": "54kg"},
+            {"key": "引用来源", "value": "Wikipedia"},
         ],
-        title='Infobox',
+        title="Infobox",
     )
 
 
 class Page(BaseModel):
-    total: int = Field(..., title='Total')
-    limit: int = Field(..., title='Limit')
-    offset: int = Field(..., title='Offset')
+    total: int = Field(..., title="Total")
+    limit: int = Field(..., title="Limit")
+    offset: int = Field(..., title="Offset")
 
 
 class PagedEpisode(BaseModel):
-    total: Optional[int] = Field(0, title='Total')
-    limit: Optional[int] = Field(0, title='Limit')
-    offset: Optional[int] = Field(0, title='Offset')
-    data: Optional[List[Episode]] = Field([], title='Data')
+    total: int | None = Field(0, title="Total")
+    limit: int | None = Field(0, title="Limit")
+    offset: int | None = Field(0, title="Offset")
+    data: list[Episode] | None = Field([], title="Data")
 
 
 class PersonCareer(Enum):
-    producer = 'producer'
-    mangaka = 'mangaka'
-    artist = 'artist'
-    seiyu = 'seiyu'
-    writer = 'writer'
-    illustrator = 'illustrator'
-    actor = 'actor'
+    producer = "producer"
+    mangaka = "mangaka"
+    artist = "artist"
+    seiyu = "seiyu"
+    writer = "writer"
+    illustrator = "illustrator"
+    actor = "actor"
 
 
 class PersonImages(BaseModel):
-    large: str = Field(..., title='Large')
-    medium: str = Field(..., title='Medium')
-    small: str = Field(..., title='Small')
-    grid: str = Field(..., title='Grid')
+    large: str = Field(..., title="Large")
+    medium: str = Field(..., title="Medium")
+    small: str = Field(..., title="Small")
+    grid: str = Field(..., title="Grid")
 
 
 class PersonType(Enum):
@@ -254,67 +253,66 @@ class PersonType(Enum):
 
 
 class RelatedPerson(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: PersonType = Field(...,
-                             description='`1`, `2`, `3` 表示 `个人`, `公司`, `组合`')
-    career: List[PersonCareer]
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: PersonType = Field(..., description="`1`, `2`, `3` 表示 `个人`, `公司`, `组合`")
+    career: list[PersonCareer]
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    relation: str = Field(..., title='Relation')
+    relation: str = Field(..., title="Relation")
 
 
 class Revision(BaseModel):
-    id: int = Field(..., title='ID')
-    type: int = Field(..., title='Type')
-    creator: Optional[Creator] = None
-    summary: str = Field(..., title='Summary')
-    created_at: datetime = Field(..., title='Created At')
+    id: int = Field(..., title="ID")
+    type: int = Field(..., title="Type")
+    creator: Creator | None = None
+    summary: str = Field(..., title="Summary")
+    created_at: datetime = Field(..., title="Created At")
 
 
 class Stat(BaseModel):
-    comments: int = Field(..., title='Comments')
-    collects: int = Field(..., title='Collects')
+    comments: int = Field(..., title="Comments")
+    collects: int = Field(..., title="Collects")
 
 
 class Count(BaseModel):
-    field_1: Optional[int] = Field(None, alias='1')
-    field_2: Optional[int] = Field(None, alias='2')
-    field_3: Optional[int] = Field(None, alias='3')
-    field_4: Optional[int] = Field(None, alias='4')
-    field_5: Optional[int] = Field(None, alias='5')
-    field_6: Optional[int] = Field(None, alias='6')
-    field_7: Optional[int] = Field(None, alias='7')
-    field_8: Optional[int] = Field(None, alias='8')
-    field_9: Optional[int] = Field(None, alias='9')
-    field_10: Optional[int] = Field(None, alias='10')
+    field_1: int | None = Field(None, alias="1")
+    field_2: int | None = Field(None, alias="2")
+    field_3: int | None = Field(None, alias="3")
+    field_4: int | None = Field(None, alias="4")
+    field_5: int | None = Field(None, alias="5")
+    field_6: int | None = Field(None, alias="6")
+    field_7: int | None = Field(None, alias="7")
+    field_8: int | None = Field(None, alias="8")
+    field_9: int | None = Field(None, alias="9")
+    field_10: int | None = Field(None, alias="10")
 
 
 class Rating(BaseModel):
-    rank: int = Field(..., title='Rank')
-    total: int = Field(..., title='Total')
-    count: Count = Field(..., title='Count')
-    score: float = Field(..., title='Score')
+    rank: int = Field(..., title="Rank")
+    total: int = Field(..., title="Total")
+    count: Count = Field(..., title="Count")
+    score: float = Field(..., title="Score")
 
 
 class Collection(BaseModel):
-    wish: int = Field(..., title='Wish')
-    collect: int = Field(..., title='Collect')
-    doing: int = Field(..., title='Doing')
-    on_hold: int = Field(..., title='On Hold')
-    dropped: int = Field(..., title='Dropped')
+    wish: int = Field(..., title="Wish")
+    collect: int = Field(..., title="Collect")
+    doing: int = Field(..., title="Doing")
+    on_hold: int = Field(..., title="On Hold")
+    dropped: int = Field(..., title="Dropped")
 
 
 class SubjectTag(BaseModel):
-    name: str = Field(..., title='Name')
-    count: int = Field(..., title='Count')
+    name: str = Field(..., title="Name")
+    count: int = Field(..., title="Count")
 
 
 class SubjectTags(BaseModel):
-    __root__: List[SubjectTag] = Field(..., title='Tags')
+    __root__: list[SubjectTag] = Field(..., title="Tags")
 
 
 class SubjectType(Enum):
@@ -334,287 +332,279 @@ class UserEpisodeCollection(BaseModel):
 
 
 class V0RelatedSubject(BaseModel):
-    id: int = Field(..., title='ID')
-    staff: str = Field(..., title='Staff')
-    name: Optional[str] = Field(None, title='Name')
-    name_cn: str = Field(..., title='Name Cn')
-    image: Optional[str] = Field(None, title='Image')
+    id: int = Field(..., title="ID")
+    staff: str = Field(..., title="Staff")
+    name: str | None = Field(None, title="Name")
+    name_cn: str = Field(..., title="Name Cn")
+    image: str | None = Field(None, title="Image")
 
 
 class V0SubjectRelation(BaseModel):
-    id: int = Field(..., title='ID')
-    type: int = Field(..., title='Type')
-    name: str = Field(..., title='Name')
-    name_cn: str = Field(..., title='Name Cn')
-    images: Optional[Images] = None
-    relation: str = Field(..., title='Relation')
+    id: int = Field(..., title="ID")
+    type: int = Field(..., title="Type")
+    name: str = Field(..., title="Name")
+    name_cn: str = Field(..., title="Name Cn")
+    images: Images | None = None
+    relation: str = Field(..., title="Relation")
 
 
 class User(BaseModel):
-    id: int = Field(..., title='ID')
-    username: str = Field(..., description='唯一用户名，初始与 UID 相同，可修改一次',
-                          title='Username')
-    nickname: str = Field(..., title='Nickname')
+    id: int = Field(..., title="ID")
+    username: str = Field(..., description="唯一用户名，初始与 UID 相同，可修改一次", title="Username")
+    nickname: str = Field(..., title="Nickname")
     user_group: UserGroup
     avatar: Avatar
-    sign: str = Field(..., description='个人签名', title='Sign')
+    sign: str = Field(..., description="个人签名", title="Sign")
 
 
 class CharacterDetail(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: CharacterType = Field(..., description='角色，机体，舰船，组织...')
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: CharacterType = Field(..., description="角色，机体，舰船，组织...")
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    summary: str = Field(..., title='Summary')
-    locked: bool = Field(..., title='Locked')
-    infobox: Optional[List[Dict[str, Any]]] = Field(
+    summary: str = Field(..., title="Summary")
+    locked: bool = Field(..., title="Locked")
+    infobox: list[dict[str, Any]] | None = Field(
         None,
-        description='server parsed infobox, a map from key to string or tuple\nnull if server infobox is not valid',
-        title='Infobox',
+        description="server parsed infobox, a map from key to string or tuple\nnull if server infobox is not valid",
+        title="Infobox",
     )
-    gender: Optional[str] = Field(
-        None, description='parsed from wiki, maybe null', title='Gender'
+    gender: str | None = Field(
+        None, description="parsed from wiki, maybe null", title="Gender"
     )
-    blood_type: Optional[BloodType] = Field(
-        None, description='parsed from wiki, maybe null, `1, 2, 3, 4` for `A, B, AB, O`'
+    blood_type: BloodType | None = Field(
+        None, description="parsed from wiki, maybe null, `1, 2, 3, 4` for `A, B, AB, O`"
     )
-    birth_year: Optional[int] = Field(
-        None, description='parsed from wiki, maybe `null`', title='Birth Year'
+    birth_year: int | None = Field(
+        None, description="parsed from wiki, maybe `null`", title="Birth Year"
     )
-    birth_mon: Optional[int] = Field(
-        None, description='parsed from wiki, maybe `null`', title='Birth Mon'
+    birth_mon: int | None = Field(
+        None, description="parsed from wiki, maybe `null`", title="Birth Mon"
     )
-    birth_day: Optional[int] = Field(
-        None, description='parsed from wiki, maybe `null`', title='Birth Day'
+    birth_day: int | None = Field(
+        None, description="parsed from wiki, maybe `null`", title="Birth Day"
     )
     stat: Stat
 
 
 class CharacterPerson(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: CharacterType = Field(..., description='角色，机体，舰船，组织...')
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: CharacterType = Field(..., description="角色，机体，舰船，组织...")
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    subject_id: int = Field(..., title='Subject ID')
-    subject_name: str = Field(..., title='Subject Name')
-    subject_name_cn: str = Field(..., title='Subject Name Cn')
+    subject_id: int = Field(..., title="Subject ID")
+    subject_name: str = Field(..., title="Subject Name")
+    subject_name_cn: str = Field(..., title="Subject Name Cn")
 
 
 class PersonRevisionDataItem(BaseModel):
-    prsn_infobox: str = Field(..., title='Person Infobox')
-    prsn_summary: str = Field(..., title='Person Summary')
+    prsn_infobox: str = Field(..., title="Person Infobox")
+    prsn_summary: str = Field(..., title="Person Summary")
     profession: PersonRevisionProfession
     extra: RevisionExtra
-    prsn_name: str = Field(..., title='Person Name')
+    prsn_name: str = Field(..., title="Person Name")
 
 
 class SubjectRevision(Revision):
-    data: Optional[SubjectRevisionData] = None
+    data: SubjectRevisionData | None = None
 
 
 class CharacterRevision(Revision):
-    data: Optional[Any] = Field(None, title='Data')
+    data: Any | None = Field(None, title="Data")
 
 
 class Index(BaseModel):
-    id: int = Field(..., title='ID')
-    title: str = Field(..., title='Title')
-    desc: str = Field(..., title='Desc')
-    total: Optional[int] = Field(0, description='收录条目总数', title='Total')
-    stat: Stat = Field(..., description='目录评论及收藏数', title='Stat')
-    created_at: datetime = Field(..., title='Created At')
+    id: int = Field(..., title="ID")
+    title: str = Field(..., title="Title")
+    desc: str = Field(..., title="Desc")
+    total: int | None = Field(0, description="收录条目总数", title="Total")
+    stat: Stat = Field(..., description="目录评论及收藏数", title="Stat")
+    created_at: datetime = Field(..., title="Created At")
     creator: Creator
-    ban: bool = Field(..., title='Ban')
-    nsfw: bool = Field(..., title='目录是否包括 nsfw 条目')
+    ban: bool = Field(..., title="Ban")
+    nsfw: bool = Field(..., title="目录是否包括 nsfw 条目")
 
 
 class IndexSubject(BaseModel):
-    id: int = Field(..., title='ID')
-    type: int = Field(..., title='Type')
-    name: str = Field(..., title='Name')
-    images: Optional[Images] = None
-    infobox: Optional[WikiV0] = None
-    date: Optional[str] = Field(None, title='Date')
-    comment: str = Field(..., title='Comment')
-    added_at: datetime = Field(..., title='Added At')
+    id: int = Field(..., title="ID")
+    type: int = Field(..., title="Type")
+    name: str = Field(..., title="Name")
+    images: Images | None = None
+    infobox: WikiV0 | None = None
+    date: str | None = Field(None, title="Date")
+    comment: str = Field(..., title="Comment")
+    added_at: datetime = Field(..., title="Added At")
 
 
 class PagedIndexSubject(BaseModel):
-    total: Optional[int] = Field(0, title='Total')
-    limit: Optional[int] = Field(0, title='Limit')
-    offset: Optional[int] = Field(0, title='Offset')
-    data: Optional[List[IndexSubject]] = Field([], title='Data')
+    total: int | None = Field(0, title="Total")
+    limit: int | None = Field(0, title="Limit")
+    offset: int | None = Field(0, title="Offset")
+    data: list[IndexSubject] | None = Field([], title="Data")
 
 
 class PagedRevision(BaseModel):
-    total: Optional[int] = Field(0, title='Total')
-    limit: Optional[int] = Field(0, title='Limit')
-    offset: Optional[int] = Field(0, title='Offset')
-    data: Optional[List[Revision]] = Field([], title='Data')
+    total: int | None = Field(0, title="Total")
+    limit: int | None = Field(0, title="Limit")
+    offset: int | None = Field(0, title="Offset")
+    data: list[Revision] | None = Field([], title="Data")
 
 
 class Person(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: PersonType = Field(...,
-                             description='`1`, `2`, `3` 表示 `个人`, `公司`, `组合`')
-    career: List[PersonCareer]
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: PersonType = Field(..., description="`1`, `2`, `3` 表示 `个人`, `公司`, `组合`")
+    career: list[PersonCareer]
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    short_summary: str = Field(..., title='Short Summary')
-    locked: bool = Field(..., title='Locked')
+    short_summary: str = Field(..., title="Short Summary")
+    locked: bool = Field(..., title="Locked")
 
 
 class PersonCharacter(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: CharacterType = Field(..., description='角色，机体，舰船，组织...')
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: CharacterType = Field(..., description="角色，机体，舰船，组织...")
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    subject_id: int = Field(..., title='Subject ID')
-    subject_name: str = Field(..., title='Subject Name')
-    subject_name_cn: str = Field(..., title='Subject Name Cn')
+    subject_id: int = Field(..., title="Subject ID")
+    subject_name: str = Field(..., title="Subject Name")
+    subject_name_cn: str = Field(..., title="Subject Name Cn")
 
 
 class PersonDetail(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: PersonType = Field(...,
-                             description='`1`, `2`, `3` 表示 `个人`, `公司`, `组合`')
-    career: List[PersonCareer]
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: PersonType = Field(..., description="`1`, `2`, `3` 表示 `个人`, `公司`, `组合`")
+    career: list[PersonCareer]
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    summary: str = Field(..., title='Summary')
-    locked: bool = Field(..., title='Locked')
+    summary: str = Field(..., title="Summary")
+    locked: bool = Field(..., title="Locked")
     last_modified: datetime = Field(
         ...,
         description="currently it's latest user comment time, it will be replaced by wiki modified date in the future",
-        title='Last Modified',
+        title="Last Modified",
     )
-    infobox: Optional[List[Dict[str, Any]]] = Field(
+    infobox: list[dict[str, Any]] | None = Field(
         None,
-        description='server parsed infobox, a map from key to string or tuple\nnull if server infobox is not valid',
-        title='Infobox',
+        description="server parsed infobox, a map from key to string or tuple\nnull if server infobox is not valid",
+        title="Infobox",
     )
-    gender: Optional[str] = Field(
-        None, description='parsed from wiki, maybe null', title='Gender'
+    gender: str | None = Field(
+        None, description="parsed from wiki, maybe null", title="Gender"
     )
-    blood_type: Optional[BloodType] = Field(
-        None, description='parsed from wiki, maybe null, `1, 2, 3, 4` for `A, B, AB, O`'
+    blood_type: BloodType | None = Field(
+        None, description="parsed from wiki, maybe null, `1, 2, 3, 4` for `A, B, AB, O`"
     )
-    birth_year: Optional[int] = Field(
-        None, description='parsed from wiki, maybe `null`', title='Birth Year'
+    birth_year: int | None = Field(
+        None, description="parsed from wiki, maybe `null`", title="Birth Year"
     )
-    birth_mon: Optional[int] = Field(
-        None, description='parsed from wiki, maybe `null`', title='Birth Mon'
+    birth_mon: int | None = Field(
+        None, description="parsed from wiki, maybe `null`", title="Birth Mon"
     )
-    birth_day: Optional[int] = Field(
-        None, description='parsed from wiki, maybe `null`', title='Birth Day'
+    birth_day: int | None = Field(
+        None, description="parsed from wiki, maybe `null`", title="Birth Day"
     )
     stat: Stat
 
 
 class RelatedCharacter(BaseModel):
-    id: int = Field(..., title='ID')
-    name: str = Field(..., title='Name')
-    type: CharacterType = Field(..., description='角色，机体，舰船，组织...')
-    images: Optional[PersonImages] = Field(
+    id: int = Field(..., title="ID")
+    name: str = Field(..., title="Name")
+    type: CharacterType = Field(..., description="角色，机体，舰船，组织...")
+    images: PersonImages | None = Field(
         None,
-        description='object with some size of images, this object maybe `null`',
-        title='Images',
+        description="object with some size of images, this object maybe `null`",
+        title="Images",
     )
-    relation: str = Field(..., title='Relation')
-    actors: Optional[List[Person]] = Field([], description='演员列表', title='Actors')
+    relation: str = Field(..., title="Relation")
+    actors: list[Person] | None = Field([], description="演员列表", title="Actors")
 
 
 class Subject(BaseModel):
-    id: int = Field(..., title='ID')
-    type: SubjectType = Field(..., title='Type')
-    name: str = Field(..., title='Name')
-    name_cn: str = Field(..., title='Name Cn')
-    summary: str = Field(..., title='Summary')
-    nsfw: bool = Field(..., title='Nsfw')
-    locked: bool = Field(..., title='Locked')
-    date: Optional[str] = Field(
-        None, description='air date in `YYYY-MM-DD` format', title='Date'
+    id: int = Field(..., title="ID")
+    type: SubjectType = Field(..., title="Type")
+    name: str = Field(..., title="Name")
+    name_cn: str = Field(..., title="Name Cn")
+    summary: str = Field(..., title="Summary")
+    nsfw: bool = Field(..., title="Nsfw")
+    locked: bool = Field(..., title="Locked")
+    date: str | None = Field(
+        None, description="air date in `YYYY-MM-DD` format", title="Date"
     )
-    platform: str = Field(..., description='TV, Web, 欧美剧, PS4...', title='Platform')
+    platform: str = Field(..., description="TV, Web, 欧美剧, PS4...", title="Platform")
     images: Images
-    infobox: Optional[WikiV0] = None
-    volumes: int = Field(..., description='书籍条目的册数，由旧服务端从wiki中解析',
-                         title='Volumes')
-    eps: int = Field(..., description='由旧服务端从wiki中解析，对于书籍条目为`话数`',
-                     title='Eps')
-    total_episodes: int = Field(..., description='数据库中的章节数量',
-                                title='Total Episodes')
-    rating: Rating = Field(..., title='Rating')
-    collection: Collection = Field(..., title='Collection')
+    infobox: WikiV0 | None = None
+    volumes: int = Field(..., description="书籍条目的册数，由旧服务端从wiki中解析", title="Volumes")
+    eps: int = Field(..., description="由旧服务端从wiki中解析，对于书籍条目为`话数`", title="Eps")
+    total_episodes: int = Field(..., description="数据库中的章节数量", title="Total Episodes")
+    rating: Rating = Field(..., title="Rating")
+    collection: Collection = Field(..., title="Collection")
     tags: SubjectTags
 
 
 class SlimSubject(BaseModel):
-    id: int = Field(..., title='ID')
-    type: SubjectType = Field(..., title='Type')
-    name: str = Field(..., title='Name')
-    name_cn: str = Field(..., title='Name Cn')
-    short_summary: str = Field(..., description='截短后的条目描述。', title='Summary')
-    date: Optional[str] = Field(
-        None, description='air date in `YYYY-MM-DD` format', title='Date'
+    id: int = Field(..., title="ID")
+    type: SubjectType = Field(..., title="Type")
+    name: str = Field(..., title="Name")
+    name_cn: str = Field(..., title="Name Cn")
+    short_summary: str = Field(..., description="截短后的条目描述。", title="Summary")
+    date: str | None = Field(
+        None, description="air date in `YYYY-MM-DD` format", title="Date"
     )
     images: Images
-    volumes: int = Field(..., description='书籍条目的册数，由旧服务端从wiki中解析',
-                         title='Volumes')
-    eps: int = Field(..., description='由旧服务端从wiki中解析，对于书籍条目为`话数`',
-                     title='Eps')
-    collection_total: int = Field(..., description='收藏人数', title='Total')
-    score: float = Field(..., description='分数', title='Total')
-    tags: SubjectTags = Field(..., description='前 10 个 tag')
+    volumes: int = Field(..., description="书籍条目的册数，由旧服务端从wiki中解析", title="Volumes")
+    eps: int = Field(..., description="由旧服务端从wiki中解析，对于书籍条目为`话数`", title="Eps")
+    collection_total: int = Field(..., description="收藏人数", title="Total")
+    score: float = Field(..., description="分数", title="Total")
+    tags: SubjectTags = Field(..., description="前 10 个 tag")
 
 
 class UserSubjectCollection(BaseModel):
-    subject_id: int = Field(..., example=8, title='Subject ID')
+    subject_id: int = Field(..., example=8, title="Subject ID")
     subject_type: SubjectType
-    rate: int = Field(..., example=4, title='Rate')
+    rate: int = Field(..., example=4, title="Rate")
     type: SubjectCollectionType
-    comment: Optional[str] = Field(None, example='看看', title='Comment')
-    tags: List[str] = Field(
-        ..., example=['柯南', '万年小学生', '推理', '青山刚昌', 'TV'], title='Tags'
+    comment: str | None = Field(None, example="看看", title="Comment")
+    tags: list[str] = Field(
+        ..., example=["柯南", "万年小学生", "推理", "青山刚昌", "TV"], title="Tags"
     )
-    ep_status: int = Field(..., example=5, title='Ep Status')
-    vol_status: int = Field(..., example=0, title='Vol Status')
+    ep_status: int = Field(..., example=5, title="Ep Status")
+    vol_status: int = Field(..., example=0, title="Vol Status")
     updated_at: datetime = Field(
         ...,
-        description='本时间并不代表条目的收藏时间。修改评分，评价，章节观看状态等收藏信息时未更新此时间是一个 bug。请不要依赖此特性',
-        example='2022-06-19T18:44:13.6140127+08:00',
-        title='Updated At',
+        description="本时间并不代表条目的收藏时间。修改评分，评价，章节观看状态等收藏信息时未更新此时间是一个 bug。请不要依赖此特性",
+        example="2022-06-19T18:44:13.6140127+08:00",
+        title="Updated At",
     )
-    private: bool = Field(..., title='Private')
-    subject: Optional[SlimSubject] = None
+    private: bool = Field(..., title="Private")
+    subject: SlimSubject | None = None
 
 
 class PersonRevision(Revision):
-    data: Optional[Dict[str, PersonRevisionDataItem]] = Field(None, title='Data')
+    data: dict[str, PersonRevisionDataItem] | None = Field(None, title="Data")
 
 
 class PagedUserCollection(BaseModel):
-    total: Optional[int] = Field(0, title='Total')
-    limit: Optional[int] = Field(0, title='Limit')
-    offset: Optional[int] = Field(0, title='Offset')
-    data: Optional[List[UserSubjectCollection]] = Field([], title='Data')
+    total: int | None = Field(0, title="Total")
+    limit: int | None = Field(0, title="Limit")
+    offset: int | None = Field(0, title="Offset")
+    data: list[UserSubjectCollection] | None = Field([], title="Data")

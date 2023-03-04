@@ -8,13 +8,11 @@ class Client:
     client: httpx.Client
 
     def __init__(self, token: str = None):
-        headers = {"user-agent": 'py-bangumi-api/dev'}
+        headers = {"user-agent": "py-bangumi-api/dev"}
         if token:
-            headers.update({"authorization": f'Bearer {token}'})
+            headers.update({"authorization": f"Bearer {token}"})
         self.client = httpx.Client(
-            base_url="https://api.bgm.tv/v0/",
-            follow_redirects=True,
-            headers=headers
+            base_url="https://api.bgm.tv/v0/", follow_redirects=True, headers=headers
         )
 
     @staticmethod
@@ -37,7 +35,7 @@ class Client:
         return Subject.parse_obj(r.json())
 
     def current_user(self) -> User:
-        r = self.client.get('me')
+        r = self.client.get("me")
 
         self._raise_for_status(r)
 
