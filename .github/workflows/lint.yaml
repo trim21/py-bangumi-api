@@ -27,7 +27,7 @@ jobs:
           linters: mypy
 
       - name: mypy
-        run: mypy --show-column-numbers transmission_rpc
+        run: mypy --show-column-numbers bangumi_api
 
   flake8:
     runs-on: ubuntu-latest
@@ -46,7 +46,8 @@ jobs:
 
       - name: flake8
         run: flake8
-  lint:
+
+  pre-commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
