@@ -1,7 +1,7 @@
 import httpx
 
-from bangumi_api.error import NotFoundError
-from bangumi_api.model import Subject
+from bangumi_api.error import NotFoundError, UnauthorizedError
+from bangumi_api.model import Subject, User
 
 
 class Client:
@@ -22,8 +22,11 @@ class Client:
         if r.is_success:
             return
 
+        if r.status_code == 401:
+            raise UnauthorizedError(r.url, r.json())
+
         if r.status_code == 404:
-            raise NotFoundError(r.url)
+            raise NotFoundError(r.url, r.json())
 
         r.raise_for_status()
 
@@ -32,3 +35,10 @@ class Client:
         self._raise_for_status(r)
 
         return Subject.parse_obj(r.json())
+
+    def current_user(self) -> User:
+        r = self.client.get('me')
+
+        self._raise_for_status(r)
+
+        return User.parse_obj(r.json())
