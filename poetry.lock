@@ -317,13 +317,13 @@ toml = ["tomli"]
 
 [[package]]
 name = "datamodel-code-generator"
-version = "0.18.1"
+version = "0.20.0"
 description = "Datamodel Code Generator"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "datamodel_code_generator-0.18.1-py3-none-any.whl", hash = "sha256:1555d0a01a3af1d0fe9c6af15d39af86cef45fd1915587c2fd5bb4117b0720b1"},
-    {file = "datamodel_code_generator-0.18.1.tar.gz", hash = "sha256:3b360d7902d682ea011d5711b1037ba4dcf1b3b6b5f56bc39ed7f5aed51facb6"},
+    {file = "datamodel_code_generator-0.20.0-py3-none-any.whl", hash = "sha256:fdb8dc18fd3a5d2c92e5e3ac473c5a48f3540066941e56fd947d2975cfebd281"},
+    {file = "datamodel_code_generator-0.20.0.tar.gz", hash = "sha256:84dc7d6ae64ca67834b414c107adf3510f46a474ac21467a683aca0a4a8f0806"},
 ]
 
 [package.dependencies]
@@ -333,7 +333,7 @@ genson = ">=1.2.1,<2.0"
 inflect = ">=4.1.0,<6.0"
 isort = ">=4.3.21,<6.0"
 jinja2 = ">=2.10.1,<4.0"
-openapi-spec-validator = ">=0.2.8,<=0.5.1"
+openapi-spec-validator = ">=0.2.8,<=0.5.2"
 packaging = "*"
 prance = ">=0.18.2,<1.0"
 pydantic = [
@@ -1485,4 +1485,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "cdae7fbeae1804be8378799acf8aa0e0ad4e7b5b22866b204b8c3d6008b97b50"
+content-hash = "e3fcab6c069846ded376e8255f6c8a5813d40dbaa26bf89b11503c4477d107fd"
