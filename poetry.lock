@@ -307,13 +307,13 @@ toml = ["tomli"]
 
 [[package]]
 name = "datamodel-code-generator"
-version = "0.22.0"
+version = "0.22.1"
 description = "Datamodel Code Generator"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "datamodel_code_generator-0.22.0-py3-none-any.whl", hash = "sha256:5cf8fc4fb6fe7aa750595a558cd4fcd43e36e862f40b0fa4cc123b4548b16a1e"},
-    {file = "datamodel_code_generator-0.22.0.tar.gz", hash = "sha256:73ebcefa498e39d0f210923856cb4a498bacc3b7bdea140cca7324e25f5c581b"},
+    {file = "datamodel_code_generator-0.22.1-py3-none-any.whl", hash = "sha256:ac1fbc4fa778c2a43f740740fd352ca4300f705044e112a0023af8d04f0b61af"},
+    {file = "datamodel_code_generator-0.22.1.tar.gz", hash = "sha256:48c8ce0b38b575bcc573237bb3faab696b072aa131b3f008c848d2c3b24a4417"},
 ]
 
 [package.dependencies]
@@ -327,9 +327,9 @@ openapi-spec-validator = ">=0.2.8,<=0.5.7"
 packaging = "*"
 prance = ">=0.18.2"
 pydantic = [
-    {version = ">=1.10.0,<3.0", extras = ["email"], markers = "python_version >= \"3.11\" and python_version < \"4.0\""},
-    {version = ">=1.5.1,<3.0", extras = ["email"], markers = "python_version < \"3.10\""},
-    {version = ">=1.9.0,<3.0", extras = ["email"], markers = "python_version >= \"3.10\" and python_version < \"3.11\""},
+    {version = ">=1.10.0,<2.4.0 || >2.4.0,<3.0", extras = ["email"], markers = "python_version >= \"3.11\" and python_version < \"4.0\""},
+    {version = ">=1.5.1,<2.4.0 || >2.4.0,<3.0", extras = ["email"], markers = "python_version < \"3.10\""},
+    {version = ">=1.9.0,<2.4.0 || >2.4.0,<3.0", extras = ["email"], markers = "python_version >= \"3.10\" and python_version < \"3.11\""},
 ]
 PySnooper = ">=0.4.1,<2.0.0"
 toml = ">=0.10.0,<1.0.0"
@@ -1505,4 +1505,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "49ff007b9af847dbf2b9907acb0f8026d7e020b7f13ca5c4afbbaef25912fea4"
+content-hash = "4e1b52e4bcaea964e696d5ff5801955c9ab2bb1b7e6a52b40d9a03b5a4b3db10"
