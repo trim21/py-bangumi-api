@@ -63,7 +63,7 @@ jobs:
       - name: Get Latest tools version
         run: echo "PY=$(python -VV | md5sum | cut -d' ' -f1)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
           key: precommit-2-${{ env.PY }}-${{ hashFiles('.pre-commit-config.yaml') }}
